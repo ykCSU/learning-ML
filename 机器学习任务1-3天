@@ -30,3 +30,8 @@ $f(x)=\frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x-\mu )^{2}}{2\sigma ^{2}}}$
     https://www.cnblogs.com/lliuye/p/9139032.html
 2.1 推导回归Loss function
     $L(f)=\sum_{n=1}^{n=N}(\hat{y}-f(x^{n}))^{2}=\sum_{n=1}^{n=N}(\hat{y}-(b+w*x)))^{2}$,其中$f(x)=y$,$y=b+w*x$
+2.2 学习损失函数与凸函数之间的关系
+2.3 了解全局最优和局部最优
+3. a.学习导数 $\frac{\mathrm{d} L}{\mathrm{d} w}|_{w=w^{0}}$
+   b.泰勒展开 $f(x)=\frac{f(x_{0})}{0!}+\frac{f'(x_{0})}{1!}(x-x_{0})+\frac{f''(x_{0})}{2!}(x-x_{0})^{2}+...+\frac{f^{n}(x_{0})}{n!}(x-x_{0})^{n}+R_{n}(x)$
+3.1 推导梯度下降公式
