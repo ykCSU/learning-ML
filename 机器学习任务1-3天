@@ -9,4 +9,4 @@
 取样本的时候，一般认为，每组大于等于30个，即可让中心极限定理发挥作用。
    b.正态分布:
 <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-<a href="https://www.codecogs.com/eqnedit.php?latex=X~N（\mu&space;，\sigma&space;^{2}）" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X~N（\mu&space;，\sigma&space;^{2}）" title="X~N（\mu ，\sigma ^{2}）" /></a>
+$\sum_{i=0}^N{X_i}$
