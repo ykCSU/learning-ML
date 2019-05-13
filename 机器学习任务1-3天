@@ -8,4 +8,10 @@
 样本每组要足够大，但也不需要太大  
 取样本的时候，一般认为，每组大于等于30个，即可让中心极限定理发挥作用。
    b.正态分布:
-   <a href="https://www.codecogs.com/eqnedit.php?latex=e\sum_{}^{}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?e\sum_{}^{}" title="e\sum_{}^{}" /></a>
+$$
+\begin{cases}
+a_1x+b_1y+c_1z=d_1\\
+a_2x+b_2y+c_2z=d_2\\
+a_3x+b_3y+c_3z=d_3\\
+\end{cases}
+$$
