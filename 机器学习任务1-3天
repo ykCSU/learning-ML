@@ -1,3 +1,4 @@
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 1. 了解什么是Machine learning
 ≈从数据中寻找一个函数
 2. a.中心极限定理:
@@ -8,6 +9,6 @@
 样本每组要足够大，但也不需要太大  
 取样本的时候，一般认为，每组大于等于30个，即可让中心极限定理发挥作用。
    b.正态分布:
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+
 \[eeeeeeeeeeeeeee\]
 $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
