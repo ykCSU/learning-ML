@@ -35,7 +35,10 @@ $f(x)=\frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x-\mu )^{2}}{2\sigma ^{2}}}$
 3. a.学习导数 $\frac{\mathrm{d} L}{\mathrm{d} w}|_{w=w^{0}}$
    b.泰勒展开 $f(x)=\frac{f(x_{0})}{0!}+\frac{f'(x_{0})}{1!}(x-x_{0})+\frac{f''(x_{0})}{2!}(x-x_{0})^{2}+...+\frac{f^{n}(x_{0})}{n!}(x-x_{0})^{n}+R_{n}(x)$
 3.1 推导梯度下降公式
-3.2 写出梯度下降的代码
+$w^{\ast },b^{\ast }=arg \underset{min}{w,b}L(w,b)$
+随机初始化$w^{0},b^{0}$,$w^{1}\leftarrow w^{0}-\eta \frac{\partial L}{\partial w}|w=w^{0},b=b^{0}$,b^{1}\leftarrow b^{0}-\eta \frac{\partial L}{\partial b}|w=w^{0},b=b^{0}
+计算该点的偏导数，然后更新。
+3.2 写出梯度下降的代码: 略
 4. $L(x,y)=\sum_{j=1}^{n}(\sqrt{(x_{j}-y_{j})^{2}})^{p}$
 这个公式是计算距离，正则化其实就是计算参数到0点的距离，于是$y_{j}=0$，于是$L(x,y)=\sum_{j=1}^{n}(\sqrt{(x_{j})^{2}})^{p}$
 ，则p=0表示L0正则，p=1表示L1正则，p=2表示L2正则。
