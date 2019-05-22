@@ -1,3 +1,8 @@
+#编程基础实在太差，花了好几天才看懂推荐的代码，请见谅，这次只能学习一下这个代码了，自己添加了一些注释
+
+
+
+
 #!/usr/bin/env python 3.6
 #-*- coding:utf-8 -*-
 # @File    : LR_Gradient.py
@@ -18,6 +23,8 @@ test = pd.read_csv(path + 'test.csv', engine='python', encoding='gbk')
 
 # 数据预处理删去不要的特征
 
+##################提取有用的特征PM2.5相关的，去除非数据的列，，，dataframe切片要用.iloc
+
 train = train[train['observation'] == 'PM2.5']
 test = test[test['AMB_TEMP'] == 'PM2.5']
 train = train.drop(['Date', 'stations', 'observation'], axis=1)
@@ -27,7 +34,8 @@ test_x = test.iloc[:, 2:]
 # 每连续的9列作为一组特征，后面的一列作为label，
 # 原始数据就可以构造出15组这样的特征+label，最后拼接起来就是3600*9
 
-
+##################制作训练数据集，包括特征和标签，每八个特征和一个标签对应，，，，15*（12*20天）=3600行数据，
+##################此时train_x是15个（240,9）的dataframe组成的list，train_y是15个（240，）的series组成的list
 train_x = []
 train_y = []
 for i in range(15):
@@ -39,17 +47,18 @@ for i in range(15):
     train_x.append(x)
     train_y.append(y)
 
-# 拼接
-
+# pd拼接
+##################train_x变为（3600,9）的dataframe，train_y变为（3600，）的series
 train_x = pd.concat(train_x)
 train_y = pd.concat(train_y)
 
-#
+##################train_y，test_x变为数组浮点形式
 train_y = np.array(train_y, float)
 test_x = np.array(test_x, float)
 print(train_x.shape, train_y.shape)
 
 # 数据归一化，若不归一化，数据收敛特别慢
+##################归一化train_x，和test_x
 ss = StandardScaler()
 ss.fit(train_x)
 train_x = ss.transform(train_x)
@@ -58,6 +67,7 @@ ss.fit(test_x)
 test_x = ss.transform(test_x)
 
 # 定义一个评价函数
+##################np.sum
 def r2_score(y_true, y_predict):
     """计算y_true和y_predict之间的MSE"""
     MSE = np.sum((y_true - y_predict) ** 2) / len(y_true)
@@ -74,7 +84,7 @@ class LinearRegression:
         self.coef_ = None
         self.intercept_ = None
         self._theta = None
-
+##################这个函数好像没用到
     def fit_normal(self, X_train, y_train):
         """根据训练数据集X_train, y_train训练Linear Regression模型"""
         assert X_train.shape[0] == y_train.shape[0], \
@@ -87,7 +97,7 @@ class LinearRegression:
         self.coef_ = self._theta[1:]
 
         return self
-
+##################训练过程
     def fit_gd(self, X_train, y_train, eta=0.01, n_iters=1e4):
         '''
 
@@ -111,7 +121,7 @@ class LinearRegression:
         '''对损失函数求导'''
         def dJ(theta, X_b, y):
             return X_b.T.dot(X_b.dot(theta) - y) * 2. / len(y)
-
+##################梯度下降   按公式来的
         def gradient_descent(X_b, y, initial_theta, eta, n_iters=1e4, epsilon=1e-8):
             '''
 
@@ -130,13 +140,14 @@ class LinearRegression:
                 gradient = dJ(theta, X_b, y)
                 last_theta = theta
                 theta = theta - eta * gradient
+                ##################如果loss变化小于epsilon值则停止
                 if (abs(J(theta, X_b, y) - J(last_theta, X_b, y)) < epsilon):
                     break
 
                 cur_iter += 1
 
             return theta
-
+##################np.hstack水平方向粘接起来，w和b作为theta一起优化
         X_b = np.hstack([np.ones((len(X_train), 1)), X_train])
 
 
@@ -147,7 +158,7 @@ class LinearRegression:
         self.coef_ = self._theta[1:]
 
         return self
-
+##################给出预测值
     def predict(self, X_predict):
         """给定待预测数据集X_predict，返回表示X_predict的结果向量"""
         assert self.intercept_ is not None and self.coef_ is not None, \
@@ -157,7 +168,7 @@ class LinearRegression:
 
         X_b = np.hstack([np.ones((len(X_predict), 1)), X_predict])
         return X_b.dot(self._theta)
-
+##################打分
     def score(self, X_test, y_test):
         """根据测试数据集 X_test 和 y_test 确定当前模型的准确度"""
 
@@ -168,10 +179,10 @@ class LinearRegression:
         return "LR()"
 
 
-
+##################返回一个类  LR
 # 模型训练+评分+预测
 LR = LinearRegression().fit_gd(train_x, train_y)
-
+##################打分加预测
 LR.score(train_x, train_y)
 result = LR.predict(test_x)
 
